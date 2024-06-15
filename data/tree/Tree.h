@@ -16,6 +16,14 @@ public:
     destroyTree(root); 
     }
 
+    Tree(const Tree& other) {
+    if (other.root) {
+        this->root = copyTree(other.root);
+    } else {
+        this->root = nullptr;
+    }
+}
+
     Tree() {
         this->root = new Node<T>();
     }
@@ -172,6 +180,20 @@ public:
         delete node; 
     }
 }
+
+    Node<T>* copyTree(const Node<T>* node) {
+        if (!node) {
+            return nullptr;
+        }
+        auto* newNode = new Node<T>(node->get()); 
+        for (int i = 0; i < node->childAmount(); ++i) {
+            auto* childCopy = copyTree(node->getChild(i)); 
+            newNode->addChild(childCopy); 
+        }
+        return newNode;
+    }
+
+
 };
 
 #endif //LAB4_TREE_H
