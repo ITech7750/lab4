@@ -13,8 +13,8 @@ private:
 public:
 
     ~Tree() {
-    destroyTree(root); // Вызываем функцию для удаления всех узлов дерева
-}
+    destroyTree(root); 
+    }
 
     Tree() {
         this->root = new Node<T>();
@@ -163,13 +163,13 @@ public:
     }
 
     private:
-    // Вспомогательная функция для рекурсивного удаления дерева
+    
     void destroyTree(Node<T>* node) {
     if (node) {
         for (int i = 0; i < node->childAmount(); ++i) {
-            destroyTree(node->getChild(i)); // Рекурсивно удаляем всех потомков текущего узла
+            destroyTree(node->getChild(i)); 
         }
-        delete node; // Удаляем текущий узел
+        delete node; 
     }
 }
 };
