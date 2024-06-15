@@ -11,6 +11,11 @@ class Tree {
 private:
     Node<T>* root;
 public:
+
+    ~Tree() {
+    destroyTree(root); // Вызываем функцию для удаления всех узлов дерева
+}
+
     Tree() {
         this->root = new Node<T>();
     }
@@ -156,6 +161,17 @@ public:
         os << "]";
         return os;
     }
+
+    private:
+    // Вспомогательная функция для рекурсивного удаления дерева
+    void destroyTree(Node<T>* node) {
+    if (node) {
+        for (int i = 0; i < node->childAmount(); ++i) {
+            destroyTree(node->getChild(i)); // Рекурсивно удаляем всех потомков текущего узла
+        }
+        delete node; // Удаляем текущий узел
+    }
+}
 };
 
 #endif //LAB4_TREE_H
